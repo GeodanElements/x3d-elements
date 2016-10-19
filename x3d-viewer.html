@@ -7,20 +7,20 @@
 <link rel="import" href="x3d-layer.html">
 
 <dom-module id="x3d-viewer">
+ <template>
  <style>
  	#x3delement {
-	    width: 100%;
-	    display: block;
+	  width: 100%;
+      height: 100%;
 	}
 	#debugconsole {
 		display: block;
 	}
 	
  </style>
- <template>
  <div id='debugconsole'>
  </div>
- <x3d id="x3delement" width='100%' height='60%'>
+ <x3d id="x3delement">
     <Scene class='scene'>
     	<Environment frustumCulling=true smallFeatureCulling=true smallFeatureThreshold=3 lowPriorityCulling=true lowPriorityThreshold=0.99></Environment>
     	<Background class="material" 
@@ -132,7 +132,7 @@ Polymer({
 		
 	},
 	lightdirection: function(time){
-		var scale = d3.scale.linear().domain([0,6,12,18,24])
+		var scale = d3.scaleLinear().domain([0,6,12,18,24])
 			.range([
 				'0.2 0.2 -1',
 				'-1 0 -0.2', 
@@ -142,12 +142,12 @@ Polymer({
 		return scale(time);
 	},
 	skycolor: function(time){
-		var scale = d3.scale.linear().domain([0,12,24]).range(['black','steelblue','black']);
+		var scale = d3.scaleLinear().domain([0,12,24]).range(['black','steelblue','black']);
 		var rgb = d3.rgb(scale(time));
 		return rgb.r/255 + ' ' + rgb.g/255 + ' ' + rgb.b/255;
 	},
 	intensity: function(time){
-		var scale= d3.scale.linear().domain([0,12,24]).range([0.2,1,0.02]);
+		var scale= d3.scaleLinear().domain([0,12,24]).range([0.2,1,0.02]);
 		return scale(time);
 	},
 	ready: function(){

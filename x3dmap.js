@@ -1,6 +1,6 @@
 var wxs3 = wxs3 || {};
-d3.ns.prefix.x3da="http://www.web3d.org/specifications/x3d-namespace";
-d3.ns.prefix.x3d="http://www.web3d.org/specifications/x3d-namespace";
+d3.namespace("x3da:http://www.web3d.org/specifications/x3d-namespace");
+d3.namespace("x3d:http://www.web3d.org/specifications/x3d-namespace");
 
 var counter = 0;
 var light1;
@@ -249,7 +249,7 @@ var render = function(ns, divid, config){
     
     
     ns.Dim = {
-        width: d3.select(divid)[0][0].clientWidth,
+        width: d3.select(divid).node().clientWidth,
         height: window.innerHeight -10 ,
         demWidth: getQueryVariable("WIDTH") || 100,
         demHeight: getQueryVariable("HEIGHT") || 250, //TT: trick to get the textures aligned along the longest side. TODO: find out what the effect on the tiles is

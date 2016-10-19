@@ -96,7 +96,7 @@ Polymer({
 	},
 	loadTile: function(tile){
 		var self = this;
-		var dsv = d3.dsv(";", "text/plain");
+		var dsv = d3.dsvFormat(";", "text/plain");
 		var bbox = tile.getWcsBbox().split(',');
 		var eps = this.config?this.config.eps:0;
 		var minpoints = this.config?this.config.minpoints:0;
@@ -105,7 +105,7 @@ Polymer({
 				if (tile.data[self.name]){
 					resolve(tile.data[self.name]);
 				}
-				dsv(self.url + 
+				d3.csv(self.url + 
 					'?set='+self.name+
 					'&west='+bbox[0]+
 					'&east='+bbox[2]+
@@ -121,6 +121,7 @@ Polymer({
 		});
 	},
 	tileLoaded: function (data) {
+		
 		var self = this;
     	var dragging = false;
     	//var layer = d3.select(this.$.layer);
