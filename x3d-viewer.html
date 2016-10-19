@@ -22,7 +22,9 @@
  </div>
  <x3d id="x3delement">
     <Scene class='scene'>
+    <!--
     	<Environment frustumCulling=true smallFeatureCulling=true smallFeatureThreshold=3 lowPriorityCulling=true lowPriorityThreshold=0.99></Environment>
+    -->
     	<Background class="material" 
     		skyColor="0.1843137254901961 0.3411764705882353 0.47058823529411764"></Background>
     	<PointLight id='pointlight' 
@@ -45,7 +47,7 @@
 		    headlight=[[headlight]]
 		    type='"EXAMINE" "ANY"'
 		    transitionTime='8.0'
-		    speed='0.01'
+		    
 		    ></NavigationInfo>
 		 <ViewPoint id='viewpoint'
            centerOfRotation="0 0 0"
@@ -65,31 +67,6 @@
     		position='0 0 0'
     		orientation='1 0 0 3'
     		></ViewPoint>
-    	<ViewPoint id='leiden1' 
-    		zNear=30 
-    		centerOfRotation='93610.0181 463873.2183 25.6168'
-    		position='93610.0181 463873.2183 25.6168'
-    		orientation='-0.3716 0.6002 0.7083 4.1466'
-    		></ViewPoint>
-    	<ViewPoint id='leiden2' 
-    		zNear=30 
-    		centerOfRotation='93975.3693 463909.0736 56.0040'
-    		position='93975.3693 463909.0736 56.0040'
-    		orientation='0.4143 0.4794 0.7736 2.1176'
-    		></ViewPoint>
-    	<ViewPoint id='leiden3' 
-    		zNear=30 
-    		centerOfRotation='93699.7792 463720.8471 30.8476'
-    		position='93699.7792 463720.8471 30.8476'
-    		orientation='0.9812 -0.1418 -0.1309 1.0953'
-    		></ViewPoint>
-		
-		<Shape DEF='light1'>
-			<Appearance>
-			  <Material emissiveColor='yellow' diffuseColor='1 0 0' specularColor='.2 .2 .2' />
-			</Appearance>
-			<Box size='3 3 1' />
-		</Shape>
     	<content></content>
     </Scene>
  </x3d>
@@ -102,7 +79,7 @@ Polymer({
 	is: 'x3d-viewer',
 	properties: {
 		tilesize: {
-			value: 100
+			value: 500
 		},
 		map: {
 			type: Object,
