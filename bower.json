@@ -1,0 +1,25 @@
+{
+  "name": "x3d-elements",
+  "homepage": "https://github.com/GeodanElements/x3d-elements",
+  "authors": [
+    "Tom van Tilburg <tom.van.tilburg@gmail.com>"
+  ],
+  "description": "Polymer elements for an x3d viewer",
+  "main": "index.html",
+  "keywords": [
+    "x3d",
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "x3dom": "^1.7.1",
+    "polymer": "^1.7.0"
+  }
+}

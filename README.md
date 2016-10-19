@@ -1,2 +1,3 @@
 # x3d-elements
-Polymer elements for the x3d viewer
+Polymer elements that can build an x3d viewer
+
