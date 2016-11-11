@@ -22,33 +22,33 @@
  </div>
  <x3d id="x3delement">
     <Scene class='scene'>
-    <!--
-    	<Environment frustumCulling=true smallFeatureCulling=true smallFeatureThreshold=3 lowPriorityCulling=true lowPriorityThreshold=0.99></Environment>
-    -->
+    
+    	<Environment 
+			frustumCulling=true 
+			lowPriorityCulling=true 
+			lowPriorityThreshold=0.99
+			shadowExcludeTransparentObjects=true
+		></Environment>
+    
     	<Background class="material" 
-    		skyColor="0.1843137254901961 0.3411764705882353 0.47058823529411764"></Background>
-    	<PointLight id='pointlight' 
-    		on='FALSE' 
-    		intensity='0.9000'
-    		ambientIntensity='0.5'
-    		color='0.0 0.6 0.0' 
-    		location='0 10 0.5 '
-    		shadowIntensity='0.5'
-    		shadowFilterSize='10'
-    		shadowOffset='20'
-    		radius='30' >  
-    	</PointLight> 
-    	<DirectionalLight
-    		direction='0.2 0.2 -1' 
-    		intensity=0.2 
-    		shadowIntensity=0 shadowCascades=0 shadowFilterSize=0></DirectionalLight>
-    	<NavigationInfo
+    		skyColor="0.1843137254901961 0.3411764705882353 0.47058823529411764"
+    	></Background>
+    	<DirectionalLight 
+    		direction="-0.2 -0.8 -0.4" 
+    		intensity="0.7" 
+    		shadowIntensity="0" 
+    		color="1,1,1" 
+    		on="true" 
+    	></DirectionalLight>
+        <NavigationInfo
 		    id='navInfo'
-		    headlight=[[headlight]]
-		    type='"EXAMINE" "ANY"'
+		    headlight='false'
+		    type='"examine" "any"'
+		    typeParams='0.0 0.0 0.2 1.4'
 		    transitionTime='8.0'
 		    
 		    ></NavigationInfo>
+		 
 		 <ViewPoint id='viewpoint'
            centerOfRotation="0 0 0"
            position="0 0 100"
@@ -67,6 +67,9 @@
     		position='0 0 0'
     		orientation='1 0 0 3'
     		></ViewPoint>
+    	<transform translation='122690.10 483916.19 7'>
+    		<pointlight USE='zwaailicht'/>
+    	</transform>
     	<content></content>
     </Scene>
  </x3d>
@@ -79,7 +82,7 @@ Polymer({
 	is: 'x3d-viewer',
 	properties: {
 		tilesize: {
-			value: 500
+			value: 100
 		},
 		map: {
 			type: Object,
@@ -89,8 +92,8 @@ Polymer({
 			type: Array
 		},
 		headlight: {
-			type: Boolean,
-			value: false
+			type: String,
+			value: 'false'
 		},
 		hour: {
 			type: Boolean,
