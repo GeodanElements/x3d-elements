@@ -192,6 +192,7 @@ Polymer({
                     }
                     
                     if (!dragging){
+                    	/*
                     	d3.select('#x3delement').append('div').classed('popup',true)
                             .style('left',d3.event.layerX/2 + 'px')
                             .style('top', d3.event.layerY/2 + 'px')
@@ -201,6 +202,7 @@ Polymer({
                             .html(html);
                         d.oldcolor = d3.select(this).select('.material').attr('emissiveColor');
                         d3.select(this).select('.material').attr('emissiveColor', 'red');
+                        */
                     }
                 })
                 .on('mousedown', function(d){
@@ -212,12 +214,13 @@ Polymer({
                 })
                 .on('mouseout', function(d){
                     d3.selectAll('.popup').remove();
-                    d3.select(this).select('.material').attr('emissiveColor', d.oldcolor);
+                    //d3.select(this).select('.material').attr('emissiveColor', d.oldcolor);
                 })                 
                 .html(function(d){
+					/*TODO: crease angle still doesn't work
                     if (d.geom && d.geom.indexOf('IndexedFaceSet') >  0){
                         d.geom = d.geom.replace('IndexedFaceSet', 'IndexedFaceSet creaseAngle="3.14" solid="false" normalPerVertex="false"');
-                    }
+                    }*/
                     return d.geom;
                 });
 		
@@ -228,18 +231,11 @@ Polymer({
 				for (var attr in self.themeconfig.gray.materials[type]){
 					material.attr(attr,self.themeconfig.gray.materials[type][attr]);
 				}
-				if (type == 'blokje'){
-					material.attr('emissiveColor',x.color);
-				}
+				//TODO: make configurable
 				if (type == 'tree'){
 					material.attr('emissiveColor',x.color);
 				}
-				else if (type == 'unclassified'){
-					material.attr('emissiveColor','white');
-				}
-				else if (type == 'ahn2objects'){
-					material.attr('emissiveColor','blue');
-				}
+				
             });
         }
         else if (data[0] && data[0].x){
