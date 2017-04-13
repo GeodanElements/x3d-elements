@@ -26,10 +26,14 @@
     	<Environment 
 			frustumCulling=true 
 			lowPriorityCulling=true 
-			lowPriorityThreshold=0.99
+			lowPriorityThreshold=0.5
 			shadowExcludeTransparentObjects=true
 		></Environment>
-    
+		<Fog 
+			visibilityRange='2000' 
+			fogType='LINEAR'
+			color='0.1843137254901961 0.3411764705882353 0.47058823529411764'
+		></Fog>
     	<Background class="material" 
     		skyColor="0.1843137254901961 0.3411764705882353 0.47058823529411764"
     	></Background>
@@ -42,10 +46,10 @@
     	></DirectionalLight>
         <NavigationInfo
 		    id='navInfo'
-		    headlight='false'
+		    headlight='true'
 		    type='"examine" "any"'
 		    typeParams='0.0 0.0 0.2 1.4'
-		    transitionTime='8.0'
+		    transitionTime='4.0'
 		    
 		    ></NavigationInfo>
 		 
@@ -53,6 +57,7 @@
            centerOfRotation="0 0 0"
            position="0 0 100"
 		   zNear=30
+		   zFar=1000
 		   orientation="0 0 0 0"
 		   ></ViewPoint>
 		<ViewPoint id='Northwards'
@@ -100,7 +105,7 @@ Polymer({
 	is: 'x3d-viewer',
 	properties: {
 		tilesize: {
-			value: 100
+			value: 200
 		},
 		map: {
 			type: Object,

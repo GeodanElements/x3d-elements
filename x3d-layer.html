@@ -231,6 +231,10 @@ Polymer({
 				for (var attr in self.themeconfig.gray.materials[type]){
 					material.attr(attr,self.themeconfig.gray.materials[type][attr]);
 				}
+				if (x.color){
+					material.attr('diffuseColor',x.color);
+				}
+				
 				//TODO: make configurable
 				if (type == 'tree'){
 					material.attr('emissiveColor',x.color);
