@@ -19,9 +19,9 @@
     "tests"
   ],
   "dependencies": {
-    "x3dom": "~1.7",
-    "polymer": "^1.7.0",
+    "d3": "~4",
+  	"x3dom": "~1",
+    "polymer": "Polymer#^1",
     "proj4": "~2.3",
-    "d3": "~4.2"
   }
 }
