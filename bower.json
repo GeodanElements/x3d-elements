@@ -20,8 +20,8 @@
   ],
   "dependencies": {
     "d3": "~4",
-  	"x3dom": "~1",
+    "x3dom": "~1",
     "polymer": "Polymer#^1",
-    "proj4": "~2.3",
+    "proj4": "~2.3"
   }
 }
