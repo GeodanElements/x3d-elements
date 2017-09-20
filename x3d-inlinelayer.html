@@ -1,0 +1,59 @@
+<link rel="import" href="../polymer/polymer.html">
+ 
+
+<dom-module id="x3d-inlinelayer">
+ <style>
+ 	
+ </style>
+ <template>
+ 
+ 	<!--<transform id='layer'></transform>-->
+ </template>
+ </dom-module>
+
+<script>
+
+Polymer({
+	is: 'x3d-inlinelayer',
+	properties: {
+		map: {
+			type: Object
+		},
+		render: {
+			type: Boolean,
+            observer: '_renderChanged'
+		},
+		url: {
+			type: String
+		},
+		name: {
+			type: String
+		},
+		loading: {
+			type: Boolean,
+			value: false,
+			notify: true
+		}
+	},
+	observers: [
+		
+	],
+
+	ready: function(){
+	},
+	attached: function(){
+		var self = this;
+		this._layer = this.$.layer;
+    	var inline = d3.select('#'+this.name);
+        inline.attr('url',this.url)
+            .attr('render',this.render);
+
+        
+
+    },
+    _renderChanged: function(){
+        var inline = d3.select('#'+this.name)
+            .attr('render',this.render);
+    }
+});
+</script>
