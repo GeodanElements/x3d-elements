@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="bower_components/polymer/polymer-element.html">
  
 
 <dom-module id="x3d-layer">
@@ -13,51 +13,60 @@
 
 <script>
 
-Polymer({
-	is: 'x3d-layer',
-	properties: {
-		map: {
-			type: Object
-		},
-		active: {
-			type: Boolean
-		},
-		url: {
-			type: String
-		},
-		name: {
-			type: String
-		},
-		themeconfig: {
-			type: Object
-		},
-		tiles: {
-			type: Array
-		},
-		loading: {
-			type: Boolean,
-			value: false,
-			notify: true
-		},
-		config: {
-			type: Object
-			
+class MyElement extends Polymer.Element {
+	
+	static get is() { return  'x3d-layer';}
+	static get properties() {
+		return {
+			map: {
+				type: Object
+			},
+			active: {
+				type: Boolean
+			},
+			url: {
+				type: String
+			},
+			name: {
+				type: String
+			},
+			themeconfig: {
+				type: Object
+			},
+			tiles: {
+				type: Array
+			},
+			loading: {
+				type: Boolean,
+				value: false,
+				notify: true
+			},
+			config: {
+				type: Object
+				
+			}
 		}
-	},
-	observers: [
-		'_activeChanged(active,tiles)'
-	],
-	_activeChanged: function(){
+	}
+	
+	static get observers() {
+		return [
+			'_activeChanged(active,tiles)'
+		]
+	}
+	
+	_activeChanged(){
 		if (!this.active){
 			this.removeTiles();
 		} else {
 			this.loadTiles();
 		}
-	},
-	removeTiles: function(){
+	}
+
+	removeTiles(){
 		d3.select('#'+this.name).selectAll('shape').remove();
-	},
-	loadTiles: function(){
+	}
+
+	loadTiles(){
 		if (!this.tiles){
 			return;
 		}
@@ -85,16 +94,16 @@ Polymer({
 				self.fire('loaded');
 			});
 		}
-	},
-	ready: function(){
-	},
-	attached: function(){
+	}
+
+	attached(){
 		var self = this;
 		this._layer = this.$.layer;
 		this.tiles = this.map.tiles;
 		
-	},
-	loadTile: function(tile){
+	}
+
+	loadTile(tile){
 		var self = this;
 		var dsv = d3.dsvFormat(";", "text/plain");
 		var bbox = tile.getWcsBbox().split(',');
@@ -119,8 +128,9 @@ Polymer({
 				});
 			},Math.random() * 2000);
 		});
-	},
-	tileLoaded: function (data) {
+	}
+
+	tileLoaded(data) {
 		
 		var self = this;
     	var dragging = false;
@@ -251,5 +261,6 @@ Polymer({
 
 		}
     }
-});
+}
+customElements.define(X3dLayer.is, X3dLayer);
 </script>

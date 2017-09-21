@@ -1,59 +1,58 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="bower_components/polymer/polymer-element.html">
  
-
 <dom-module id="x3d-inlinelayer">
  <style>
  	
  </style>
  <template>
  
- 	<!--<transform id='layer'></transform>-->
+ 	
  </template>
  </dom-module>
 
 <script>
 
-Polymer({
-	is: 'x3d-inlinelayer',
-	properties: {
-		map: {
-			type: Object
-		},
-		render: {
-			type: Boolean,
-            observer: '_renderChanged'
-		},
-		url: {
-			type: String
-		},
-		name: {
-			type: String
-		},
-		loading: {
-			type: Boolean,
-			value: false,
-			notify: true
+class MyElement extends Polymer.Element {
+	
+	static get is() { return  'x3d-inlinelayer'; }
+	static get properties() {
+		return {
+			map: {
+				type: Object
+			},
+			render: {
+				type: Boolean,
+				observer: '_renderChanged'
+			},
+			url: {
+				type: String
+			},
+			name: {
+				type: String
+			},
+			loading: {
+				type: Boolean,
+				value: false,
+				notify: true
+			}
 		}
-	},
-	observers: [
-		
-	],
+	}
+	
 
-	ready: function(){
-	},
-	attached: function(){
+	attached(){
 		var self = this;
 		this._layer = this.$.layer;
     	var inline = d3.select('#'+this.name);
         inline.attr('url',this.url)
 			.attr('render',this.render);
 			
-    },
-    _renderChanged: function(){
+    }
+    _renderChanged(){
         var inline = d3.select('#'+this.name)
 			.attr('render',this.render);
 			
-	},
+	}
 	
-});
+}
+customElements.define(X3dInlinelayer.is, X3dInlinelayer);
 </script>

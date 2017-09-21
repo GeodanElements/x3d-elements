@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="./bower_components/polymer/polymer-element.html">
 <link rel="stylesheet" type="text/css" href="../x3dom/x3dom.css" />
 <script src="../x3dom/x3dom.js"></script>
 <script src="../proj4/dist/proj4.js"></script>
@@ -91,40 +91,43 @@
     		orientation='0.9812 -0.1418 -0.1309 1.0953'
     		></ViewPoint>
     	<transform translation='122690.10 483916.19 7'>
-    		<pointlight USE='zwaailicht'/>
     	</transform>
-    	<content></content>
+    	<slot></slot>
     </Scene>
  </x3d>
  </template>
  </dom-module>
 
 <script>
+class X3dViewer extends Polymer.Element {
 
-Polymer({
-	is: 'x3d-viewer',
-	properties: {
-		tilesize: {
-			value: 200
-		},
-		map: {
-			type: Object,
-			notify: true
-		},
-		layers: {
-			type: Array
-		},
-		headlight: {
-			type: String,
-			value: 'false'
-		},
-		hour: {
-			type: Boolean,
-			value: 8,
-			observer: '_hourChanged'
+	static get is() { return  'x3d-viewer'; }
+	static get properties() {
+		return {
+		
+			tilesize: {
+				value: 200
+			},
+			map: {
+				type: Object,
+				notify: true
+			},
+			layers: {
+				type: Array
+			},
+			headlight: {
+				type: String,
+				value: 'false'
+			},
+			hour: {
+				type: Boolean,
+				value: 8,
+				observer: '_hourChanged'
+			}
 		}
-	},
-	_hourChanged: function(hour){
+	}
+
+	_hourChanged(hour){
 		d3.select('DirectionalLight')
 			.transition().duration('2000')
 			.attr('intensity', this.intensity(hour))
@@ -133,8 +136,9 @@ Polymer({
 			.transition().duration('2000')
 			.attr('skyColor', this.skycolor(hour));
 		
-	},
-	lightdirection: function(time){
+	}
+
+	lightdirection(time){
 		var scale = d3.scaleLinear().domain([0,6,12,18,24])
 			.range([
 				'0.2 0.2 -1',
@@ -143,23 +147,29 @@ Polymer({
 				'1 0 -0.2',
 			'0.2 0.2 -1']);
 		return scale(time);
-	},
-	skycolor: function(time){
+	}
+
+	skycolor(time){
 		var scale = d3.scaleLinear().domain([0,12,24]).range(['black','steelblue','black']);
 		var rgb = d3.rgb(scale(time));
 		return rgb.r/255 + ' ' + rgb.g/255 + ' ' + rgb.b/255;
-	},
-	intensity: function(time){
+	}
+
+	intensity(time){
 		var scale= d3.scaleLinear().domain([0,12,24]).range([0.2,1,0.02]);
 		return scale(time);
-	},
-	ready: function(){
-		
-	},
-	attached: function(){
+	}
+
+	constructor() {
+    	super();
+	}
+
+
+	attached(){
 		this.init();
-	},
-	init: function(){
+	}
+
+	init(){
 		this.map = render(wxs3, this.$.x3delement, {
 			themeconfig: this.themeconfig,
 			tilesize: this.tilesize,
@@ -168,5 +178,6 @@ Polymer({
 		});
 	}
 
-});
+}
+customElements.define(X3dViewer.is, X3dViewer);
 </script>
