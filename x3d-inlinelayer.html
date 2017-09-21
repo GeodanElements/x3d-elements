@@ -46,14 +46,14 @@ Polymer({
 		this._layer = this.$.layer;
     	var inline = d3.select('#'+this.name);
         inline.attr('url',this.url)
-            .attr('render',this.render);
-
-        
-
+			.attr('render',this.render);
+			
     },
     _renderChanged: function(){
         var inline = d3.select('#'+this.name)
-            .attr('render',this.render);
-    }
+			.attr('render',this.render);
+			
+	},
+	
 });
 </script>
