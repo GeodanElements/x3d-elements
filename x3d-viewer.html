@@ -1,18 +1,20 @@
-<link rel="import" href="./bower_components/polymer/polymer-element.html">
+<link rel="import" href="../polymer/polymer-element.html">
 <link rel="stylesheet" type="text/css" href="../x3dom/x3dom.css" />
 <script src="../x3dom/x3dom.js"></script>
 <script src="../proj4/dist/proj4.js"></script>
 <script src="../d3/d3.min.js"></script>
 <script src="x3dmap.js"></script> 
-<link rel="import" href="x3d-layer.html">
 
 <dom-module id="x3d-viewer">
  <template>
  <style>
  	#x3delement {
-	  width: 100%;
-      height: 100%;
+	  width: 400px;
+	  height: 400px;
+	  display:block;
+	  background: orange;
 	}
+	
 	#debugconsole {
 		display: block;
 	}
@@ -20,9 +22,11 @@
  </style>
  <div id='debugconsole'>
  </div>
+ Here will be the viewer
+ 
+ 
  <x3d id="x3delement">
     <Scene class='scene'>
-    
     	<Environment 
 			frustumCulling=true 
 			lowPriorityCulling=true 
@@ -92,9 +96,9 @@
     		></ViewPoint>
     	<transform translation='122690.10 483916.19 7'>
     	</transform>
-    	<slot></slot>
     </Scene>
  </x3d>
+ <div id="entrypoint"></div>
  </template>
  </dom-module>
 
@@ -163,19 +167,41 @@ class X3dViewer extends Polymer.Element {
 	constructor() {
     	super();
 	}
+	ready(){
+		super.ready();
+		x3dom.reload();
+	}
 
-
-	attached(){
-		this.init();
+	connectedCallback() {
+		var self = this;
+		console.log('connected');
+		Polymer.RenderStatus.beforeNextRender(this, function() {
+			var e = document.createElement('script');
+        	e.src = './bower_components/x3dom/x3dom.js';
+        	this.$.entrypoint.appendChild(e);
+			/*
+		    self.init();
+			var ep = d3.select(this.$.entrypoint);
+			var x3d = ep.append('x3d').attr('id','x3delement');
+			var scene = x3d.append('Scene')
+				.attr('class', 'scene');
+			scene.append('Background').attr('class',"material")
+    			.attr('skyColor',"0.1843137254901961 0.3411764705882353 0.47058823529411764");
+			
+			x3dom.reload();
+	*/
+		});
 	}
 
 	init(){
+		/*
 		this.map = render(wxs3, this.$.x3delement, {
 			themeconfig: this.themeconfig,
 			tilesize: this.tilesize,
 			loadlist: this.layers,
 			bbox: '93616,463691,93887,463981' //Leiden
 		});
+		*/
 	}
 
 }

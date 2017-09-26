@@ -21,7 +21,7 @@
   "dependencies": {
     "d3": "~4",
     "x3dom": "~1",
-    "polymer": "Polymer#~2",
-    "proj4": "~2.3"
+    "proj4": "~2.3",
+    "polymer": "~2"
   }
 }
