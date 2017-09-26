@@ -8,10 +8,9 @@
  <template>
  <style>
  	#x3delement {
-	  width: 400px;
-	  height: 400px;
-	  display:block;
-	  background: orange;
+		 /*fixme*/
+	  width: 600px;
+	  height: 600px;
 	}
 	
 	#debugconsole {
@@ -21,10 +20,8 @@
  </style>
  <div id='debugconsole'>
  </div>
- Here will be the viewer
- 
- 
- <x3d id="x3delement">
+  
+ <x3d id="x3delement" width=100% height=100%>
     <Scene class='scene'>
     	<Environment 
 			frustumCulling=true 
@@ -94,13 +91,13 @@
     		orientation='0.9812 -0.1418 -0.1309 1.0953'
     		></ViewPoint>
     	<transform translation='122690.10 483916.19 7'>
-    	</transform>
+		</transform>
+		<content></content>
     </Scene>
  </x3d>
- <div id="entrypoint"></div>
  </template>
  
-
+</dom-module>
 <script>
 //class X3dViewer extends Polymer.Element {
 
@@ -164,27 +161,27 @@ Polymer({
 		var scale= d3.scaleLinear().domain([0,12,24]).range([0.2,1,0.02]);
 		return scale(time);
 	},
-
+	attached: function(){
+		this.init();
+	},
 	//constructor() {
    // 	super();
 	//},
 	ready: function(){
 		//super.ready();
-		x3dom.reload();
 	},
 
 	init: function(){
-		/*
+
 		this.map = render(wxs3, this.$.x3delement, {
 			themeconfig: this.themeconfig,
 			tilesize: this.tilesize,
 			loadlist: this.layers,
 			bbox: '93616,463691,93887,463981' //Leiden
 		});
-		*/
+
 	}
 
 });
 //customElements.define(X3dViewer.is, X3dViewer);
 </script>
-</dom-module>
