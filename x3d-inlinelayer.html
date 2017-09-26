@@ -1,17 +1,20 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<!--<link rel="import" href="../polymer/polymer-element.html">-->
  
 <dom-module id="x3d-inlinelayer">
  <template>
  </template>
-</dom-module>
+
 
 <script>
 
-class X3dInlinelayer extends Polymer.Element {
+//class X3dInlinelayer extends Polymer.Element {
 	
-	static get is() { return  'x3d-inlinelayer'; }
-	static get properties() {
-		return {
+//	static get is() { return  'x3d-inlinelayer'; }
+//	static get properties() {
+		//return {
+Polymer({
+	is: 'x3d-inlinelayer',
+	properties: {
 			map: {
 				type: Object
 			},
@@ -30,24 +33,24 @@ class X3dInlinelayer extends Polymer.Element {
 				value: false,
 				notify: true
 			}
-		}
-	}
+	},
 	
 
-	attached(){
+	attached: function(){
 		var self = this;
 		this._layer = this.$.layer;
     	var inline = d3.select('#'+this.name);
         inline.attr('url',this.url)
 			.attr('render',this.render);
 			
-    }
-    _renderChanged(){
+    },
+    _renderChanged: function(){
         var inline = d3.select('#'+this.name)
 			.attr('render',this.render);
 			
 	}
 	
-}
-customElements.define(X3dInlinelayer.is, X3dInlinelayer);
+});
+//customElements.define(X3dInlinelayer.is, X3dInlinelayer);
 </script>
+</dom-module>

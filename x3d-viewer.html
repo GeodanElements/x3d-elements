@@ -1,5 +1,4 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="stylesheet" type="text/css" href="../x3dom/x3dom.css" />
+<!--<link rel="import" href="../polymer/polymer-element.html">-->
 <script src="../x3dom/x3dom.js"></script>
 <script src="../proj4/dist/proj4.js"></script>
 <script src="../d3/d3.min.js"></script>
@@ -100,15 +99,17 @@
  </x3d>
  <div id="entrypoint"></div>
  </template>
- </dom-module>
+ 
 
 <script>
-class X3dViewer extends Polymer.Element {
+//class X3dViewer extends Polymer.Element {
 
-	static get is() { return  'x3d-viewer'; }
-	static get properties() {
-		return {
-		
+//	static get is() { return  'x3d-viewer'; }
+//	static get properties() {
+//		return {
+Polymer({
+	is: 'x3d-viewer',
+	properties: {
 			tilesize: {
 				value: 200
 			},
@@ -128,10 +129,10 @@ class X3dViewer extends Polymer.Element {
 				value: 8,
 				observer: '_hourChanged'
 			}
-		}
-	}
+	},
+	
 
-	_hourChanged(hour){
+	_hourChanged: function(hour){
 		d3.select('DirectionalLight')
 			.transition().duration('2000')
 			.attr('intensity', this.intensity(hour))
@@ -140,9 +141,9 @@ class X3dViewer extends Polymer.Element {
 			.transition().duration('2000')
 			.attr('skyColor', this.skycolor(hour));
 		
-	}
+	},
 
-	lightdirection(time){
+	lightdirection: function(time){
 		var scale = d3.scaleLinear().domain([0,6,12,18,24])
 			.range([
 				'0.2 0.2 -1',
@@ -151,49 +152,28 @@ class X3dViewer extends Polymer.Element {
 				'1 0 -0.2',
 			'0.2 0.2 -1']);
 		return scale(time);
-	}
+	},
 
-	skycolor(time){
+	skycolor: function(time){
 		var scale = d3.scaleLinear().domain([0,12,24]).range(['black','steelblue','black']);
 		var rgb = d3.rgb(scale(time));
 		return rgb.r/255 + ' ' + rgb.g/255 + ' ' + rgb.b/255;
-	}
+	},
 
-	intensity(time){
+	intensity: function(time){
 		var scale= d3.scaleLinear().domain([0,12,24]).range([0.2,1,0.02]);
 		return scale(time);
-	}
+	},
 
-	constructor() {
-    	super();
-	}
-	ready(){
-		super.ready();
+	//constructor() {
+   // 	super();
+	//},
+	ready: function(){
+		//super.ready();
 		x3dom.reload();
-	}
+	},
 
-	connectedCallback() {
-		var self = this;
-		console.log('connected');
-		Polymer.RenderStatus.beforeNextRender(this, function() {
-			var e = document.createElement('script');
-        	e.src = './bower_components/x3dom/x3dom.js';
-        	this.$.entrypoint.appendChild(e);
-			/*
-		    self.init();
-			var ep = d3.select(this.$.entrypoint);
-			var x3d = ep.append('x3d').attr('id','x3delement');
-			var scene = x3d.append('Scene')
-				.attr('class', 'scene');
-			scene.append('Background').attr('class',"material")
-    			.attr('skyColor',"0.1843137254901961 0.3411764705882353 0.47058823529411764");
-			
-			x3dom.reload();
-	*/
-		});
-	}
-
-	init(){
+	init: function(){
 		/*
 		this.map = render(wxs3, this.$.x3delement, {
 			themeconfig: this.themeconfig,
@@ -204,6 +184,7 @@ class X3dViewer extends Polymer.Element {
 		*/
 	}
 
-}
-customElements.define(X3dViewer.is, X3dViewer);
+});
+//customElements.define(X3dViewer.is, X3dViewer);
 </script>
+</dom-module>

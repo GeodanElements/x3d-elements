@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<!--<link rel="import" href="../polymer/polymer-element.html">-->
  
 
 <dom-module id="x3d-layer">
@@ -9,15 +9,18 @@
  
  	<!--<transform id='layer'></transform>-->
  </template>
- </dom-module>
+ 
 
 <script>
 
-class X3dLayer extends Polymer.Element {
+//class X3dLayer extends Polymer.Element {
 	
-	static get is() { return  'x3d-layer';}
-	static get properties() {
-		return {
+	//static get is() { return  'x3d-layer';}
+	//static get properties() {
+Polymer({
+	is: 'x3d-layer',
+	properties: {
+		//return {
 			map: {
 				type: Object
 			},
@@ -45,28 +48,29 @@ class X3dLayer extends Polymer.Element {
 				type: Object
 				
 			}
-		}
-	}
+	},
 	
-	static get observers() {
-		return [
+	
+	//static get observers() {
+	observers: [
+		//return [
 			'_activeChanged(active,tiles)'
-		]
-	}
+		],
 	
-	_activeChanged(){
+	
+	_activeChanged: function(){
 		if (!this.active){
 			this.removeTiles();
 		} else {
 			this.loadTiles();
 		}
-	}
+	},
 
-	removeTiles(){
+	removeTiles: function(){
 		d3.select('#'+this.name).selectAll('shape').remove();
-	}
+	},
 
-	loadTiles(){
+	loadTiles: function(){
 		if (!this.tiles){
 			return;
 		}
@@ -94,16 +98,16 @@ class X3dLayer extends Polymer.Element {
 				self.fire('loaded');
 			});
 		}
-	}
+	},
 
-	attached(){
+	attached: function(){
 		var self = this;
 		this._layer = this.$.layer;
 		this.tiles = this.map.tiles;
 		
-	}
+	},
 
-	loadTile(tile){
+	loadTile: function(tile){
 		var self = this;
 		var dsv = d3.dsvFormat(";", "text/plain");
 		var bbox = tile.getWcsBbox().split(',');
@@ -128,9 +132,9 @@ class X3dLayer extends Polymer.Element {
 				});
 			},Math.random() * 2000);
 		});
-	}
+	},
 
-	tileLoaded(data) {
+	tileLoaded: function(data) {
 		
 		var self = this;
     	var dragging = false;
@@ -260,7 +264,9 @@ class X3dLayer extends Polymer.Element {
 			shape.append('PointSet').append('Coordinate').attr('point',string);
 
 		}
-    }
-}
-customElements.define(X3dLayer.is, X3dLayer);
+    },
+
+//customElements.define(X3dLayer.is, X3dLayer);
+});
 </script>
+</dom-module>
