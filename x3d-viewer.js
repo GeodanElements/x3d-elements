@@ -1,9 +1,9 @@
 import {LitElement, html} from '@polymer/lit-element';
 
 
-import 'node_modules/x3dom/x3dom.js';
-import 'node_modules/proj4/dist/proj4.js';
-import 'node_modules/d3/d3.min.js';
+import 'x3dom/x3dom.js';
+import 'proj4/dist/proj4.js';
+import 'd3/d3.min.js';
 import 'x3dmap.js';
 
 class X3dViewer extends LitElement {
