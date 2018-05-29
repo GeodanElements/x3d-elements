@@ -1,27 +1,9 @@
-<!--<link rel="import" href="../polymer/polymer-element.html">-->
+import {LitElement, html} from '@polymer/lit-element';
  
-
-<dom-module id="x3d-layer">
- <style>
- 	
- </style>
- <template>
- 
- 	<!--<transform id='layer'></transform>-->
- </template>
- 
-
-<script>
-
-//class X3dLayer extends Polymer.Element {
-	
-	//static get is() { return  'x3d-layer';}
-	//static get properties() {
-Polymer({
-	is: 'x3d-layer',
-	properties: {
-		//return {
-			map: {
+class X3dLayer extends LitElement {
+    static get properties() {
+        return {
+            map: {
 				type: Object
 			},
 			active: {
@@ -47,30 +29,32 @@ Polymer({
 			config: {
 				type: Object
 				
-			}
-	},
+            }
+        }
+	}
 	
 	
 	//static get observers() {
-	observers: [
-		//return [
+	static get observers() {
+        return [
 			'_activeChanged(active,tiles)'
-		],
+        ]
+    }
 	
 	
-	_activeChanged: function(){
+	_activeChanged(){
 		if (!this.active){
 			this.removeTiles();
 		} else {
 			this.loadTiles();
 		}
-	},
+	}
 
-	removeTiles: function(){
+	removeTiles(){
 		d3.select('#'+this.name).selectAll('shape').remove();
-	},
+	}
 
-	loadTiles: function(){
+	loadTiles(){
 		if (!this.tiles){
 			return;
 		}
@@ -98,16 +82,16 @@ Polymer({
 				self.fire('loaded');
 			});
 		}
-	},
+	}
 
-	attached: function(){
+	attached(){
 		var self = this;
 		this._layer = this.$.layer;
 		this.tiles = this.map.tiles;
 		
-	},
+	}
 
-	loadTile: function(tile){
+	loadTile(tile){
 		var self = this;
 		var dsv = d3.dsvFormat(";", "text/plain");
 		var bbox = tile.getWcsBbox().split(',');
@@ -132,9 +116,9 @@ Polymer({
 				});
 			},Math.random() * 2000);
 		});
-	},
+	}
 
-	tileLoaded: function(data) {
+	tileLoaded(data) {
 		
 		var self = this;
     	var dragging = false;
@@ -264,9 +248,7 @@ Polymer({
 			shape.append('PointSet').append('Coordinate').attr('point',string);
 
 		}
-    },
+    }
+}
 
-//customElements.define(X3dLayer.is, X3dLayer);
-});
-</script>
-</dom-module>
+customElements.define('x3d-layer', X3dLayer);

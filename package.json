@@ -1,0 +1,30 @@
+{
+  "name": "x3d-elements",
+  "version": "1.0.0",
+  "description": "lit elements for x3d viewer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeodanElements/x3d-elements.git"
+  },
+  "keywords": [
+    "x3dom",
+    "litelement"
+  ],
+  "author": "Tom van Tilburg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GeodanElements/x3d-elements/issues"
+  },
+  "homepage": "https://github.com/GeodanElements/x3d-elements#readme",
+  "dependencies": {
+    "@polymer/lit-element": "^0.5.1",
+    "@webcomponents/webcomponentsjs": "^1.0.20",
+    "d3": "^5.4.0",
+    "proj4": "^2.4.4",
+    "x3dom": "^1.7.2"
+  }
+}
