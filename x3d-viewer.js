@@ -4,7 +4,7 @@ import {LitElement, html} from '@polymer/lit-element';
 import 'x3dom/x3dom.js';
 import 'proj4/dist/proj4.js';
 import 'd3/dist/d3.min.js';
-import 'x3dmap.js';
+import './x3dmap.js';
 
 class X3dViewer extends LitElement {
     static get properties() {
