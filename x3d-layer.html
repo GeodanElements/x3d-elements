@@ -239,14 +239,14 @@ Polymer({
                 });
 		
             var appearance = newshape.append("Appearance").each(function(x){
-            	var material = d3.select(this).append("TwoSidedMaterial").classed('material', true);
+            	var material = d3.select(this).append("Material").classed('material', true);
             	var type = x.type.replace(' ','_');
 
 				for (var attr in self.themeconfig.gray.materials[type]){
 					material.attr(attr,self.themeconfig.gray.materials[type][attr]);
 				}
 				if (x.color){
-					material.attr('diffuseColor',x.color);
+					material.attr('emissiveColor',x.color);
 				}
 				
 				//TODO: make configurable
